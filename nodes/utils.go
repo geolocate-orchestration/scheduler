@@ -2,12 +2,11 @@ package nodes
 
 import (
 	"errors"
-	v1 "k8s.io/api/core/v1"
 	"math/rand"
 	"reflect"
 )
 
-func nodeHasSignificantChanges(oldNode *v1.Node, newNode *v1.Node) bool {
+func nodeHasSignificantChanges(oldNode *Node, newNode *Node) bool {
 	return oldNode.Name != newNode.Name ||
 		oldNode.Labels[cityLabel] != newNode.Labels[cityLabel] ||
 		oldNode.Labels[countryLabel] != newNode.Labels[countryLabel] ||

@@ -2,7 +2,6 @@ package nodes
 
 import (
 	"github.com/aida-dos/gountries"
-	"k8s.io/client-go/kubernetes"
 )
 
 // INodes exports all node controller public methods
@@ -10,18 +9,29 @@ type INodes interface {
 	CountNodes() int
 	GetAllNodes() []*Node
 	GetNodes(filter *NodeFilter) []*Node
-	FindNodesByCity(cities []string, filter *NodeFilter) map[string][]*Node
-	FindNodesByCityCountry(cities []string, filter *NodeFilter) map[string][]*Node
-	FindNodesByCityContinent(cities []string, filter *NodeFilter) map[string][]*Node
-	FindNodesByCountry(countries []string, filter *NodeFilter) map[string][]*Node
-	FindNodesByCountryContinent(countries []string, filter *NodeFilter) map[string][]*Node
-	FindNodesByContinent(continents []string, filter *NodeFilter) map[string][]*Node
+
+	AddNode(node *Node)
+	UpdateNode(oldNode *Node, newNode *Node)
+	DeleteNode(node *Node)
+}
+
+// New create a new Nodes struct
+func New() INodes {
+	nodes := Nodes{
+		Query:          gountries.New(),
+		ContinentsList: gountries.NewContinents(),
+
+		Nodes:      make([]*Node, 0),
+		Cities:     make(map[string][]*Node),
+		Countries:  make(map[string][]*Node),
+		Continents: make(map[string][]*Node),
+	}
+
+	return &nodes
 }
 
 // Nodes controls in-cache nodes
 type Nodes struct {
-	ClientSet *kubernetes.Clientset
-
 	Query          *gountries.Query
 	ContinentsList gountries.Continents
 
@@ -41,9 +51,22 @@ type Node struct {
 
 // NodeFilter states the params which nodes must match to be returned
 type NodeFilter struct {
-	Labels []string
+	Labels    map[string]string
+	Resources Resources
+	Locations Locations
+}
+
+// Resources states the available resources nodes must have to be returned
+type Resources struct {
 	CPU    int64
 	Memory int64
+}
+
+// Locations states the location params nodes must match to be returned
+type Locations struct {
+	Cities     []string
+	Countries  []string
+	Continents []string
 }
 
 const (

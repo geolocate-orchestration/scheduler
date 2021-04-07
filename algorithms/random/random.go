@@ -1,11 +1,10 @@
 package random
 
 import (
-	"aida-scheduler/scheduler/algorithms"
-	"aida-scheduler/scheduler/nodes"
 	"errors"
-	v1 "k8s.io/api/core/v1"
 	"k8s.io/klog/v2"
+	"scheduler/algorithms"
+	"scheduler/nodes"
 )
 
 type random struct {
@@ -23,7 +22,7 @@ func (r random) GetName() string {
 	return "random"
 }
 
-func (r random) GetNode(*v1.Pod) (*nodes.Node, error) {
+func (r random) GetNode(*algorithms.Workload) (*nodes.Node, error) {
 	klog.Infoln("getting cached nodes")
 	return getRandomNode(r.inodes)
 }

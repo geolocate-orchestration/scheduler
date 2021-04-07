@@ -1,12 +1,12 @@
-# aida-scheduler
+# scheduler
 
-[![Test](https://github.com/aida-dos/aida-scheduler/actions/workflows/test.yml/badge.svg?branch=develop)](https://github.com/aida-dos/aida-scheduler/actions/workflows/test.yml)
+[![Test](https://github.com/aida-dos/scheduler/actions/workflows/test.yml/badge.svg?branch=develop)](https://github.com/aida-dos/scheduler/actions/workflows/test.yml)
 
 IoT and other data-intensive systems produce enormous amounts of data to be processed. In this project, we explore the
 Edge Computing concept as additional computational power to the Cloud nodes, allowing data process computations to occur
 closer to their source.
 
-Using Kubernetes/KubeEdge to manage the data processing workloads, the aida-scheduler aims towards substantial
+Using Kubernetes/KubeEdge to manage the data processing workloads, the scheduler aims towards substantial
 improvements in scalability levels, reducing the request latency and network usage, by scheduling those workloads in
 Edge Nodes based on the geographical location of the data and resource availability.
 
@@ -33,14 +33,14 @@ kubectl apply -f examples/release_scheduler_crd.yaml
 
 #### Build custom docker image
 ```shell
-docker build -t aida-scheduler .
+docker build -t scheduler .
 ```
 
 ### Development
 
-#### Run the aida-scheduler
+#### Run the scheduler
 
-To develop aida-scheduler in a Kubernetes cluster we use [ksync](https://github.com/ksync/ksync)
+To develop scheduler in a Kubernetes cluster we use [ksync](https://github.com/ksync/ksync)
 to sync files between our local system, and the cluster.
 
 1. Install ksync. You can follow ksync installation steps [here](https://github.com/ksync/ksync#installation).
@@ -53,7 +53,7 @@ to sync files between our local system, and the cluster.
    
 3. If not done before then create a ksync configuration for the current folder.
     ```shell
-    ksync create --selector=component=aida-scheduler --reload=false --local-read-only=true $(pwd) /code
+    ksync create --selector=component=scheduler --reload=false --local-read-only=true $(pwd) /code
     ```
 
 4. Start ksync update system
@@ -63,7 +63,7 @@ to sync files between our local system, and the cluster.
 
 5. Run the scheduler in the cluster pod
     ```shell
-    kubectl exec -it $(kubectl get pod -n kube-system | grep aida-scheduler | awk '{print $1}') -- sh
+    kubectl exec -it $(kubectl get pod -n kube-system | grep scheduler | awk '{print $1}') -- sh
     cd /code
     ALGORITHM=naivelocation go run main.go
     ```
@@ -88,7 +88,7 @@ go fmt ./...
 
 ### Manage nodes
 
-The aida-scheduler only manages Edge nodes, because the main purpose is to allow application workload to be deployed
+The scheduler only manages Edge nodes, because the main purpose is to allow application workload to be deployed
 near the source of data to be processed. Therefore, the node controller filters nodes by 'node-role.kubernetes.io/edge'
 labels.
 
