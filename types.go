@@ -1,8 +1,8 @@
 package scheduler
 
 import (
-	"scheduler/algorithms"
-	"scheduler/nodes"
+	"github.com/mv-orchestration/scheduler/algorithms"
+	"github.com/mv-orchestration/scheduler/nodes"
 )
 
 // AvailableAlgorithms list all package algorithms that can be used

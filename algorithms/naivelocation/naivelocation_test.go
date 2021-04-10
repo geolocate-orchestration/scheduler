@@ -1,10 +1,10 @@
 package naivelocation
 
 import (
-	"github.com/aida-dos/gountries"
+	"github.com/mv-orchestration/gountries"
+	"github.com/mv-orchestration/scheduler/algorithms"
+	"github.com/mv-orchestration/scheduler/nodes"
 	"github.com/stretchr/testify/assert"
-	"scheduler/algorithms"
-	"scheduler/nodes"
 	"testing"
 )
 

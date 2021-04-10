@@ -26,7 +26,7 @@ func (n *Nodes) buildFromLocations(locations Locations) []*Node {
 	n.getContinents(locations.Continents, &nodesMap)
 
 	nodes := make([]*Node, 0, len(nodesMap))
-	for  _, value := range nodesMap {
+	for _, value := range nodesMap {
 		nodes = append(nodes, value)
 	}
 	return nodes

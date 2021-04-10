@@ -1,7 +1,7 @@
 package nodes
 
 import (
-	"github.com/aida-dos/gountries"
+	"github.com/mv-orchestration/gountries"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
@@ -18,7 +18,7 @@ func newTestNode(name string, edge bool, city string, country string, continent 
 	}
 
 	return &Node{
-		Name: name,
+		Name:   name,
 		Labels: labels,
 	}
 }
@@ -51,7 +51,7 @@ func TestGetAndCountNodes(t *testing.T) {
 
 func TestGetNodesFilter(t *testing.T) {
 	nodes := newTestNodes()
-	filter := &NodeFilter{Resources: Resources{ CPU: 5000 }}
+	filter := &NodeFilter{Resources: Resources{CPU: 5000}}
 
 	node0 := &Node{Name: "Node0", CPU: 2500}
 	nodes.Nodes = append(nodes.Nodes, node0)
@@ -211,7 +211,7 @@ func TestNodeFilterFailMemory(t *testing.T) {
 }
 
 func TestGetRandomFromListHit(t *testing.T) {
-	node := &Node{ Name: "Node0" }
+	node := &Node{Name: "Node0"}
 	value, _ := GetRandomFromList([]*Node{node})
 	assert.Equal(t, "Node0", value.Name)
 }
@@ -222,7 +222,7 @@ func TestGetRandomFromListEmptyError(t *testing.T) {
 }
 
 func TestGetRandomFromMapHit(t *testing.T) {
-	node := &Node{ Name: "Node0" }
+	node := &Node{Name: "Node0"}
 	value, _ := GetRandomFromMap(map[string][]*Node{"node": {node}})
 	assert.Equal(t, "Node0", value.Name)
 }

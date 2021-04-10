@@ -1,7 +1,7 @@
 package algorithms
 
 import (
-	"scheduler/nodes"
+	"github.com/mv-orchestration/scheduler/nodes"
 )
 
 // Algorithm interface that exposes GetNode method

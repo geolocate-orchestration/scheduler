@@ -2,11 +2,11 @@ package scheduler
 
 import (
 	"errors"
-	"scheduler/algorithms"
-	"scheduler/algorithms/location"
-	"scheduler/algorithms/naivelocation"
-	"scheduler/algorithms/random"
-	"scheduler/nodes"
+	"github.com/mv-orchestration/scheduler/algorithms"
+	"github.com/mv-orchestration/scheduler/algorithms/location"
+	"github.com/mv-orchestration/scheduler/algorithms/naivelocation"
+	"github.com/mv-orchestration/scheduler/algorithms/random"
+	"github.com/mv-orchestration/scheduler/nodes"
 )
 
 // NewScheduler create a new instance of the IScheduler interface
@@ -42,7 +42,6 @@ func (s *Scheduler) UpdateNode(oldNode *nodes.Node, newNode *nodes.Node) {
 func (s *Scheduler) DeleteNode(node *nodes.Node) {
 	s.inodes.DeleteNode(node)
 }
-
 
 // Unexported
 
