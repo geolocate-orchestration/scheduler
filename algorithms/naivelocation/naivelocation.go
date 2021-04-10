@@ -3,10 +3,10 @@ package naivelocation
 import (
 	"errors"
 	"fmt"
-	"github.com/aida-dos/gountries"
+	"github.com/mv-orchestration/gountries"
+	"github.com/mv-orchestration/scheduler/algorithms"
+	"github.com/mv-orchestration/scheduler/nodes"
 	"k8s.io/klog/v2"
-	"scheduler/algorithms"
-	"scheduler/nodes"
 	"strings"
 )
 
@@ -165,7 +165,7 @@ func (g *naivelocation) getByContinent() (*nodes.Node, error) {
 
 // Helpers
 
-func getNodes(inodes nodes.INodes, cities []string, countries []string, continents []string,) []*nodes.Node {
+func getNodes(inodes nodes.INodes, cities []string, countries []string, continents []string) []*nodes.Node {
 	nodeFilter := &nodes.NodeFilter{
 		Locations: nodes.Locations{
 			Cities:     cities,

@@ -1,9 +1,9 @@
 package random
 
 import (
-	"scheduler/algorithms"
-	"scheduler/nodes"
-	"github.com/aida-dos/gountries"
+	"github.com/mv-orchestration/gountries"
+	"github.com/mv-orchestration/scheduler/algorithms"
+	"github.com/mv-orchestration/scheduler/nodes"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )

@@ -3,10 +3,10 @@ package location
 import (
 	"errors"
 	"fmt"
-	"github.com/aida-dos/gountries"
+	"github.com/mv-orchestration/gountries"
+	"github.com/mv-orchestration/scheduler/algorithms"
+	"github.com/mv-orchestration/scheduler/nodes"
 	"k8s.io/klog/v2"
-	"scheduler/algorithms"
-	"scheduler/nodes"
 	"strings"
 )
 
@@ -66,7 +66,7 @@ func (g *location) buildResourceFilter() *nodes.NodeFilter {
 	return &nodes.NodeFilter{
 		Labels: nil,
 		Resources: nodes.Resources{
-			CPU: g.pod.CPU,
+			CPU:    g.pod.CPU,
 			Memory: g.pod.Memory,
 		},
 	}
@@ -175,7 +175,7 @@ func (g *location) getByContinent() (*nodes.Node, error) {
 
 // Helpers
 
-func getNodes(inodes nodes.INodes, workload *algorithms.Workload, cities []string, countries []string, continents []string,) []*nodes.Node {
+func getNodes(inodes nodes.INodes, workload *algorithms.Workload, cities []string, countries []string, continents []string) []*nodes.Node {
 	nodeFilter := &nodes.NodeFilter{
 		Locations: nodes.Locations{
 			Cities:     cities,

@@ -1,7 +1,7 @@
 package nodes
 
 import (
-	"github.com/aida-dos/gountries"
+	"github.com/mv-orchestration/gountries"
 )
 
 // INodes exports all node controller public methods

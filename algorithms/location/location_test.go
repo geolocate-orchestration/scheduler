@@ -1,10 +1,10 @@
 package location
 
 import (
-	"github.com/aida-dos/gountries"
+	"github.com/mv-orchestration/gountries"
+	"github.com/mv-orchestration/scheduler/algorithms"
+	"github.com/mv-orchestration/scheduler/nodes"
 	"github.com/stretchr/testify/assert"
-	"scheduler/algorithms"
-	"scheduler/nodes"
 	"testing"
 )
 
@@ -65,7 +65,7 @@ func newTestPod(typeString string, value string) *algorithms.Workload {
 
 	return &algorithms.Workload{
 		Labels: labels,
-		CPU: 10000,
+		CPU:    10000,
 		Memory: 10000,
 	}
 }

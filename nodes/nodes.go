@@ -3,7 +3,7 @@ package nodes
 import (
 	"errors"
 	"fmt"
-	"github.com/aida-dos/gountries"
+	"github.com/mv-orchestration/gountries"
 	"k8s.io/klog/v2"
 )
 

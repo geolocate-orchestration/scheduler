@@ -2,9 +2,9 @@ package random
 
 import (
 	"errors"
+	"github.com/mv-orchestration/scheduler/algorithms"
+	"github.com/mv-orchestration/scheduler/nodes"
 	"k8s.io/klog/v2"
-	"scheduler/algorithms"
-	"scheduler/nodes"
 )
 
 type random struct {
