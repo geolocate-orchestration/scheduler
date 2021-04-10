@@ -1,21 +1,20 @@
 package location
 
 import (
-	"aida-scheduler/scheduler/nodes"
 	"github.com/aida-dos/gountries"
 	"github.com/stretchr/testify/assert"
-	v1 "k8s.io/api/core/v1"
-	"k8s.io/apimachinery/pkg/api/resource"
-	metaV1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"scheduler/algorithms"
+	"scheduler/nodes"
 	"testing"
 )
 
-func newTestGeo(nodes *nodes.Nodes, pod *v1.Pod) *location {
+func newTestGeo(nodes *nodes.Nodes, pod *algorithms.Workload) *location {
 	if nodes == nil {
 		nodes = newTestNodes(nil, nil, nil, nil)
 	}
 
 	return &location{
+		query:      gountries.New(),
 		nodes:      nodes,
 		pod:        pod,
 		queryType:  "",
@@ -47,8 +46,6 @@ func newTestNodes(
 	}
 
 	return &nodes.Nodes{
-		ClientSet: nil,
-
 		Query:          gountries.New(),
 		ContinentsList: gountries.NewContinents(),
 
@@ -59,25 +56,17 @@ func newTestNodes(
 	}
 }
 
-func newTestPod(typeString string, value string) *v1.Pod {
+func newTestPod(typeString string, value string) *algorithms.Workload {
 	labels := map[string]string{}
 
 	if typeString != "nil" {
-		labels["deployment.edge.aida.io/"+typeString+"Location"] = value
+		labels[typeString+"Location"] = value
 	}
 
-	return &v1.Pod{
-		ObjectMeta: metaV1.ObjectMeta{
-			Labels: labels,
-		},
-		Spec: v1.PodSpec{Containers: []v1.Container{{
-			Resources: v1.ResourceRequirements{
-				Requests: v1.ResourceList{
-					"cpu":    resource.MustParse("10"), // will take value of 10000
-					"memory": resource.MustParse("10"), // will take value of 10000
-				},
-			},
-		}}},
+	return &algorithms.Workload{
+		Labels: labels,
+		CPU: 10000,
+		Memory: 10000,
 	}
 }
 

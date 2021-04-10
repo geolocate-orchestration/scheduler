@@ -1,21 +1,19 @@
 package random
 
 import (
-	"aida-scheduler/scheduler/algorithms"
-	"aida-scheduler/scheduler/nodes"
+	"scheduler/algorithms"
+	"scheduler/nodes"
 	"github.com/aida-dos/gountries"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
 func newTestRandom() algorithms.Algorithm {
-	return New(nodes.New(nil))
+	return New(nodes.New())
 }
 
 func newTestRandomWithNode() *nodes.Nodes {
 	return &nodes.Nodes{
-		ClientSet: nil,
-
 		Query:          gountries.New(),
 		ContinentsList: gountries.NewContinents(),
 

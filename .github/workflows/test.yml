@@ -1,7 +1,7 @@
 on:
   push:
     branches:
-      - main
+      - develop
   pull_request:
     branches:
       - develop
@@ -27,4 +27,3 @@ jobs:
           version: v1.39
       - name: Test
         run: go test --coverprofile=coverage.out ./...
-

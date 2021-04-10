@@ -1,20 +1,20 @@
 package naivelocation
 
 import (
-	"aida-scheduler/scheduler/nodes"
 	"github.com/aida-dos/gountries"
 	"github.com/stretchr/testify/assert"
-	v1 "k8s.io/api/core/v1"
-	metaV1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"scheduler/algorithms"
+	"scheduler/nodes"
 	"testing"
 )
 
-func newTestGeo(nodes *nodes.Nodes, pod *v1.Pod) *naivelocation {
+func newTestGeo(nodes *nodes.Nodes, pod *algorithms.Workload) *naivelocation {
 	if nodes == nil {
 		nodes = newTestNodes(nil, nil, nil, nil)
 	}
 
 	return &naivelocation{
+		query:      gountries.New(),
 		nodes:      nodes,
 		pod:        pod,
 		queryType:  "",
@@ -46,8 +46,6 @@ func newTestNodes(
 	}
 
 	return &nodes.Nodes{
-		ClientSet: nil,
-
 		Query:          gountries.New(),
 		ContinentsList: gountries.NewContinents(),
 
@@ -58,17 +56,15 @@ func newTestNodes(
 	}
 }
 
-func newTestPod(typeString string, value string) *v1.Pod {
+func newTestPod(typeString string, value string) *algorithms.Workload {
 	labels := map[string]string{}
 
 	if typeString != "nil" {
-		labels["deployment.edge.aida.io/"+typeString+"Location"] = value
+		labels[typeString+"Location"] = value
 	}
 
-	return &v1.Pod{
-		ObjectMeta: metaV1.ObjectMeta{
-			Labels: labels,
-		},
+	return &algorithms.Workload{
+		Labels: labels,
 	}
 }
 
