@@ -18,7 +18,7 @@ func NewScheduler(algorithm string) (IScheduler, error) {
 	}
 
 	s.inodes = nodes.New()
-	s.initAlgorithm(algorithm)
+	s.algorithm = s.initAlgorithm(algorithm)
 
 	return s, nil
 }
