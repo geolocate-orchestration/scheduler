@@ -7,14 +7,14 @@ import (
 	"testing"
 )
 
-func newTestNode(name string, edge bool, city string, country string, continent string) *Node {
+func newTestNode(name string, labeled bool, city string, country string, continent string) *Node {
 	lb := map[string]string{
 		labels.NodeCity:      city,
 		labels.NodeCountry:   country,
 		labels.NodeContinent: continent,
 	}
 
-	if edge {
+	if labeled {
 		lb[labels.Node] = ""
 	}
 
@@ -66,7 +66,7 @@ func TestGetNodesFilter(t *testing.T) {
 	assert.Equal(t, "Node1", nodes.GetNodes(filter)[0].Name)
 }
 
-func TestAddEdgeNodeError(t *testing.T) {
+func TestAddNodeError(t *testing.T) {
 	nodes := newTestNodes()
 	node := newTestNode("Node0", true, "RANDOM_C_123", "RANDOM_C_123", "RANDOM_C_123")
 
@@ -115,7 +115,7 @@ func TestUpdateNodeResources(t *testing.T) {
 	assert.Equal(t, "test", nodes.Nodes[0].Labels["test_label"])
 }
 
-func TestDeleteEdgeNode(t *testing.T) {
+func TestDeleteNode(t *testing.T) {
 	nodes := newTestNodes()
 	node := newTestNode("Node0", true, "Braga", "Portugal", "Europe")
 
@@ -132,7 +132,7 @@ func TestDeleteNormalNode(t *testing.T) {
 	deleteNode := newTestNode("Node0", false, "", "", "")
 	nodes.DeleteNode(deleteNode)
 
-	assert.Equal(t, 1, nodes.CountNodes())
+	assert.Equal(t, 0, nodes.CountNodes())
 }
 
 func TestDeleteErrorExitsGracefully(t *testing.T) {

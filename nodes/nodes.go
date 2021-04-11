@@ -45,17 +45,46 @@ func (n *Nodes) addToContinents(node *Node) {
 	}
 }
 
-func (n *Nodes) updateNodeData(oldNode *Node, newNode *Node) {
-	if nodeHasSignificantChanges(oldNode, newNode) {
-		klog.Infof("node will be replaced in cache: %s\n", oldNode.Name)
-		n.DeleteNode(oldNode)
+func (n *Nodes) updateNodeData(savedNode *Node, newNode *Node) {
+	if nodeHasSignificantChanges(savedNode, newNode) {
+		n.DeleteNode(savedNode)
 		n.AddNode(newNode)
+		klog.Infof("node replaced in cache: %s\n", savedNode.Name)
 	} else {
-		klog.Infof("node will be updated in cache: %s\n", oldNode.Name)
-		node, _ := n.findNodeByName(newNode.Name)
-		node.Labels = newNode.Labels
-		node.CPU = newNode.CPU
-		node.Memory = newNode.Memory
+		n.updateNodeFields(savedNode, newNode)
+	}
+}
+
+func (n *Nodes) updateNodeFields(savedNode *Node, newNode *Node) {
+	if savedNode.CPU != newNode.CPU {
+		klog.Infof("updated node %s CPU: %d -> %d\n", savedNode.Name, savedNode.CPU, newNode.CPU)
+		savedNode.CPU = newNode.CPU
+	}
+
+	if savedNode.Memory != newNode.Memory {
+		klog.Infof("updated node %s Memory: %d -> %d\n", savedNode.Name, savedNode.Memory, newNode.Memory)
+		savedNode.Memory = newNode.Memory
+	}
+
+	for key, newValue := range newNode.Labels {
+		oldValue, ok := savedNode.Labels[key]
+
+		if !ok {
+			savedNode.Labels[key] = newValue
+			klog.Infof("updated node %s - added label '%s' with value '%s'\n", savedNode.Name, key, newValue)
+		} else if oldValue != newValue {
+			savedNode.Labels[key] = newValue
+			klog.Infof("updated node %s - '%s' label changed: '%s' -> '%s'\n", savedNode.Name, key, oldValue, newValue)
+		}
+	}
+
+	for key := range savedNode.Labels {
+		_, ok := newNode.Labels[key]
+
+		if !ok {
+			delete(savedNode.Labels, key)
+			klog.Infof("updated node %s - deleted label '%s'\n", savedNode.Name, key)
+		}
 	}
 }
 
