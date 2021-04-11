@@ -43,9 +43,16 @@ type Nodes struct {
 
 // Node represents a cluster Node
 type Node struct {
-	Name   string
+	// Name represents Node unique identifying name
+	Name string
+
+	// Labels represents all of Node labels
 	Labels map[string]string
-	CPU    int64
+
+	// CPU represents Node available CPU resources in MilliValue
+	CPU int64
+
+	// Memory represents Node available Memory resources in MilliValue
 	Memory int64
 }
 
@@ -68,9 +75,3 @@ type Locations struct {
 	Countries  []string
 	Continents []string
 }
-
-const (
-	cityLabel      = "node.edge.aida.io/city"
-	countryLabel   = "node.edge.aida.io/country"
-	continentLabel = "node.edge.aida.io/continent"
-)

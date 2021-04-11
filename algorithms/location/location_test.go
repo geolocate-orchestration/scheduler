@@ -3,6 +3,7 @@ package location
 import (
 	"github.com/mv-orchestration/gountries"
 	"github.com/mv-orchestration/scheduler/algorithms"
+	"github.com/mv-orchestration/scheduler/labels"
 	"github.com/mv-orchestration/scheduler/nodes"
 	"github.com/stretchr/testify/assert"
 	"testing"
@@ -57,14 +58,19 @@ func newTestNodes(
 }
 
 func newTestPod(typeString string, value string) *algorithms.Workload {
-	labels := map[string]string{}
+	lbs := map[string]string{}
 
 	if typeString != "nil" {
-		labels[typeString+"Location"] = value
+		switch typeString {
+		case "required":
+			lbs[labels.WorkloadRequiredLocation] = value
+		case "preferred":
+			lbs[labels.WorkloadPreferredLocation] = value
+		}
 	}
 
 	return &algorithms.Workload{
-		Labels: labels,
+		Labels: lbs,
 		CPU:    10000,
 		Memory: 10000,
 	}

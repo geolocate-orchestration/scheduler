@@ -4,11 +4,12 @@ import (
 	"errors"
 	"fmt"
 	"github.com/mv-orchestration/gountries"
+	"github.com/mv-orchestration/scheduler/labels"
 	"k8s.io/klog/v2"
 )
 
 func (n *Nodes) addToCities(node *Node) {
-	cityValue := node.Labels[cityLabel]
+	cityValue := node.Labels[labels.NodeCity]
 
 	if cityValue != "" {
 		if city, err := n.Query.FindSubdivisionByName(cityValue); err == nil {
@@ -21,7 +22,7 @@ func (n *Nodes) addToCities(node *Node) {
 }
 
 func (n *Nodes) addToCountries(node *Node) {
-	countryValue := node.Labels[countryLabel]
+	countryValue := node.Labels[labels.NodeCountry]
 
 	if countryValue != "" {
 		if country, err := n.findCountry(countryValue); err == nil {
@@ -33,7 +34,7 @@ func (n *Nodes) addToCountries(node *Node) {
 }
 
 func (n *Nodes) addToContinents(node *Node) {
-	continentValue := node.Labels[continentLabel]
+	continentValue := node.Labels[labels.NodeContinent]
 
 	if continentValue != "" {
 		if continent, err := n.ContinentsList.FindContinent(continentValue); err == nil {
@@ -77,7 +78,7 @@ func (n *Nodes) removeNodeFromNodes(node *Node) {
 }
 
 func (n *Nodes) removeNodeFromCities(node *Node) {
-	cityValue := node.Labels[cityLabel]
+	cityValue := node.Labels[labels.NodeCity]
 
 	if cityValue != "" {
 		if city, err := n.Query.FindSubdivisionByName(cityValue); err == nil {
@@ -94,7 +95,7 @@ func (n *Nodes) removeNodeFromCities(node *Node) {
 }
 
 func (n *Nodes) removeNodeFromCountries(node *Node) {
-	countryValue := node.Labels[countryLabel]
+	countryValue := node.Labels[labels.NodeCountry]
 	if countryValue != "" {
 		if country, err := n.findCountry(countryValue); err == nil {
 			for i, v := range n.Countries[country.Alpha2] {
@@ -110,7 +111,7 @@ func (n *Nodes) removeNodeFromCountries(node *Node) {
 }
 
 func (n *Nodes) removeNodeFromContinents(node *Node) {
-	continentValue := node.Labels[continentLabel]
+	continentValue := node.Labels[labels.NodeContinent]
 
 	if continentValue != "" {
 		if continent, err := n.ContinentsList.FindContinent(continentValue); err == nil {

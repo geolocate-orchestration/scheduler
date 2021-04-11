@@ -2,15 +2,16 @@ package nodes
 
 import (
 	"errors"
+	"github.com/mv-orchestration/scheduler/labels"
 	"math/rand"
 	"reflect"
 )
 
 func nodeHasSignificantChanges(oldNode *Node, newNode *Node) bool {
 	return oldNode.Name != newNode.Name ||
-		oldNode.Labels[cityLabel] != newNode.Labels[cityLabel] ||
-		oldNode.Labels[countryLabel] != newNode.Labels[countryLabel] ||
-		oldNode.Labels[continentLabel] != newNode.Labels[continentLabel]
+		oldNode.Labels[labels.NodeCity] != newNode.Labels[labels.NodeCity] ||
+		oldNode.Labels[labels.NodeCountry] != newNode.Labels[labels.NodeCountry] ||
+		oldNode.Labels[labels.NodeContinent] != newNode.Labels[labels.NodeContinent]
 }
 
 // GetRandomFromList returns a random node from the list

@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/mv-orchestration/gountries"
 	"github.com/mv-orchestration/scheduler/algorithms"
+	"github.com/mv-orchestration/scheduler/labels"
 	"github.com/mv-orchestration/scheduler/nodes"
 	"k8s.io/klog/v2"
 	"strings"
@@ -73,8 +74,16 @@ func (g *location) buildResourceFilter() *nodes.NodeFilter {
 }
 
 func (g *location) getNodeByLocation() (*nodes.Node, error) {
-	locations := g.pod.Labels[g.queryType+"Location"]
-	klog.Infoln(g.queryType, "location:", locations)
+	label := ""
+	switch g.queryType {
+	case "required":
+		label = labels.WorkloadRequiredLocation
+	case "preferred":
+		label = labels.WorkloadPreferredLocation
+	}
+
+	locations := g.pod.Labels[label]
+	klog.Infoln(label, locations)
 
 	// fill location info from labels in the geo struct
 	g.parseLocations(locations)
@@ -220,11 +229,11 @@ func (g *location) getCountriesPredecessors(countries []string, continents *map[
 }
 
 func (g *location) getLocationLabelType() string {
-	if g.pod.Labels["requiredLocation"] != "" {
+	if g.pod.Labels[labels.WorkloadRequiredLocation] != "" {
 		return "required"
 	}
 
-	if g.pod.Labels["preferredLocation"] != "" {
+	if g.pod.Labels[labels.WorkloadPreferredLocation] != "" {
 		return "preferred"
 	}
 
