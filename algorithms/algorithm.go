@@ -12,8 +12,15 @@ type Algorithm interface {
 
 // Workload represents a cluster application to be scheduled
 type Workload struct {
-	Name   string
+	// Name represents Workload unique identifying name
+	Name string
+
+	// Labels represents all labels Node must have to be considered for this workload schedule
 	Labels map[string]string
-	CPU    int64
+
+	// CPU represents Workloads' necessary CPU resources Nodes must at least have available
+	CPU int64
+
+	// Memory represents Workloads' necessary Memory resources Nodes must at least have available
 	Memory int64
 }

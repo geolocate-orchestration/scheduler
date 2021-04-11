@@ -2,24 +2,25 @@ package nodes
 
 import (
 	"github.com/mv-orchestration/gountries"
+	"github.com/mv-orchestration/scheduler/labels"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
 func newTestNode(name string, edge bool, city string, country string, continent string) *Node {
-	labels := map[string]string{
-		cityLabel:      city,
-		countryLabel:   country,
-		continentLabel: continent,
+	lb := map[string]string{
+		labels.NodeCity:      city,
+		labels.NodeCountry:   country,
+		labels.NodeContinent: continent,
 	}
 
 	if edge {
-		labels["node-role.kubernetes.io/edge"] = ""
+		lb[labels.Node] = ""
 	}
 
 	return &Node{
 		Name:   name,
-		Labels: labels,
+		Labels: lb,
 	}
 }
 
