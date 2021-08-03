@@ -1,7 +1,7 @@
 package nodes
 
 import (
-	"github.com/mv-orchestration/gountries"
+	"github.com/geolocate-orchestration/gountries"
 )
 
 // INodes exports all node controller public methods

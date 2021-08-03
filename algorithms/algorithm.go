@@ -1,7 +1,7 @@
 package algorithms
 
 import (
-	"github.com/mv-orchestration/scheduler/nodes"
+	"github.com/geolocate-orchestration/scheduler/nodes"
 )
 
 // Algorithm interface that exposes GetNode method

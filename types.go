@@ -1,8 +1,8 @@
 package scheduler
 
 import (
-	"github.com/mv-orchestration/scheduler/algorithms"
-	"github.com/mv-orchestration/scheduler/nodes"
+	"github.com/geolocate-orchestration/scheduler/algorithms"
+	"github.com/geolocate-orchestration/scheduler/nodes"
 )
 
 // AvailableAlgorithms list all package algorithms that can be used

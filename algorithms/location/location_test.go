@@ -1,10 +1,10 @@
 package location
 
 import (
-	"github.com/mv-orchestration/gountries"
-	"github.com/mv-orchestration/scheduler/algorithms"
-	"github.com/mv-orchestration/scheduler/labels"
-	"github.com/mv-orchestration/scheduler/nodes"
+	"github.com/geolocate-orchestration/gountries"
+	"github.com/geolocate-orchestration/scheduler/algorithms"
+	"github.com/geolocate-orchestration/scheduler/labels"
+	"github.com/geolocate-orchestration/scheduler/nodes"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )

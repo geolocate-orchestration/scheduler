@@ -2,7 +2,7 @@ package nodes
 
 import (
 	"errors"
-	"github.com/mv-orchestration/scheduler/labels"
+	"github.com/geolocate-orchestration/scheduler/labels"
 	"math/rand"
 	"reflect"
 )
