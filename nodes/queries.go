@@ -1,7 +1,6 @@
 package nodes
 
 import (
-	"github.com/mv-orchestration/scheduler/labels"
 	"k8s.io/klog/v2"
 )
 
@@ -22,8 +21,8 @@ func (n *Nodes) GetNodes(filter *NodeFilter) []*Node {
 
 // AddNode add a new cluster node
 func (n *Nodes) AddNode(node *Node) {
-	if _, ok := node.Labels[labels.Node]; !ok {
-		// Don't add new node if it doesn't have the node.mv.io role
+	if !nodeHasAnyLabel(node) {
+		// Don't add new node if it doesn't have the node.geolocate.io role
 		return
 	}
 
@@ -43,8 +42,8 @@ func (n *Nodes) UpdateNode(oldNode *Node, newNode *Node) {
 		return
 	}
 
-	_, oldHasNodeLabel := savedNode.Labels[labels.Node]
-	_, newHasNodeLabel := newNode.Labels[labels.Node]
+	oldHasNodeLabel := nodeHasAnyLabel(savedNode)
+	newHasNodeLabel := nodeHasAnyLabel(newNode)
 
 	if !oldHasNodeLabel && newHasNodeLabel {
 		// If node wasn't labeled but now it is, create it in cache

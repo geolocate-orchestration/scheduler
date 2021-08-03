@@ -46,10 +46,10 @@ type Node struct {
 
 Nodes can be configured with the following labels:
 
-- **node.mv.io** - Node must have this label to be used in the algorithm
-- **node.mv.io/city** - Indicates node city location
-- **node.mv.io/country** - Indicates node country location
-- **node.mv.io/continent** - Indicates node continent location
+- **node.geolocate.io** - Node must have this label to be used in the algorithm
+- **node.geolocate.io/city** - Indicates node city location
+- **node.geolocate.io/country** - Indicates node country location
+- **node.geolocate.io/continent** - Indicates node continent location
 
 ### Workload Labeling
 
@@ -73,8 +73,8 @@ type Workload struct {
 
 Workloads can be configured with the following labels:
 
-- **workload.mv.io/requiredLocation** - List of Workload required locations
-- **workload.mv.io/preferredLocation** - List of Workload preferred locations
+- **workload.geolocate.io/requiredLocation** - List of Workload required locations
+- **workload.geolocate.io/preferredLocation** - List of Workload preferred locations
 
 Location format:
 

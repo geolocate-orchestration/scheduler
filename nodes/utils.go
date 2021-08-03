@@ -14,6 +14,18 @@ func nodeHasSignificantChanges(oldNode *Node, newNode *Node) bool {
 		oldNode.Labels[labels.NodeContinent] != newNode.Labels[labels.NodeContinent]
 }
 
+func nodeHasAnyLabel(node *Node) bool {
+	nodeLabels := [4]string{labels.Node, labels.NodeCity, labels.NodeCountry, labels.NodeContinent}
+
+	for _, label := range nodeLabels {
+		if _, ok := node.Labels[label]; ok {
+			return true
+		}
+	}
+
+	return false
+}
+
 // GetRandomFromList returns a random node from the list
 func GetRandomFromList(options []*Node) (*Node, error) {
 	if len(options) == 0 {

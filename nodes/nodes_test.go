@@ -8,10 +8,14 @@ import (
 )
 
 func newTestNode(name string, labeled bool, city string, country string, continent string) *Node {
-	lb := map[string]string{
-		labels.NodeCity:      city,
-		labels.NodeCountry:   country,
-		labels.NodeContinent: continent,
+	lb := map[string]string{}
+	nodeLabels := [3]string{labels.NodeCity, labels.NodeCountry, labels.NodeContinent}
+	values := [3]string{city, country, continent}
+
+	for i, label := range nodeLabels {
+		if values[i] != "" {
+			lb[label] = values[i]
+		}
 	}
 
 	if labeled {
