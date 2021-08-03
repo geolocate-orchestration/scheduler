@@ -1,6 +1,6 @@
 # scheduler
 
-[![Test](https://github.com/mv-orchestration/scheduler/actions/workflows/test.yml/badge.svg?branch=develop)](https://github.com/mv-orchestration/scheduler/actions/workflows/test.yml)
+[![Test](https://github.com/geolocate-orchestration/scheduler/actions/workflows/test.yml/badge.svg?branch=develop)](https://github.com/geolocate-orchestration/scheduler/actions/workflows/test.yml)
 
 ## Usage
 

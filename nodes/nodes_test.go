@@ -1,8 +1,8 @@
 package nodes
 
 import (
-	"github.com/mv-orchestration/gountries"
-	"github.com/mv-orchestration/scheduler/labels"
+	"github.com/geolocate-orchestration/gountries"
+	"github.com/geolocate-orchestration/scheduler/labels"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )

@@ -2,11 +2,11 @@ package scheduler
 
 import (
 	"errors"
-	"github.com/mv-orchestration/scheduler/algorithms"
-	"github.com/mv-orchestration/scheduler/algorithms/location"
-	"github.com/mv-orchestration/scheduler/algorithms/naivelocation"
-	"github.com/mv-orchestration/scheduler/algorithms/random"
-	"github.com/mv-orchestration/scheduler/nodes"
+	"github.com/geolocate-orchestration/scheduler/algorithms"
+	"github.com/geolocate-orchestration/scheduler/algorithms/location"
+	"github.com/geolocate-orchestration/scheduler/algorithms/naivelocation"
+	"github.com/geolocate-orchestration/scheduler/algorithms/random"
+	"github.com/geolocate-orchestration/scheduler/nodes"
 )
 
 // NewScheduler create a new instance of the IScheduler interface

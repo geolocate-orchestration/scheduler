@@ -2,8 +2,8 @@ package random
 
 import (
 	"errors"
-	"github.com/mv-orchestration/scheduler/algorithms"
-	"github.com/mv-orchestration/scheduler/nodes"
+	"github.com/geolocate-orchestration/scheduler/algorithms"
+	"github.com/geolocate-orchestration/scheduler/nodes"
 	"k8s.io/klog/v2"
 )
 
